@@ -1,0 +1,82 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/user/list",
+			"style": {
+				"navigationBarTitleText": "会员列表"
+			}
+		},
+		{
+			"path": "pages/user/add",
+			"style": {
+				"navigationBarTitleText": "新增会员"
+			}
+		},
+		{
+			"path": "pages/user/update",
+			"style": {
+				"navigationBarTitleText": "编辑会员"
+			}
+		},
+		{
+			"path": "pages/user/in",
+			"style": {
+				"navigationBarTitleText": "充值"
+			}
+		},
+		{
+			"path": "pages/user/out",
+			"style": {
+				"navigationBarTitleText": "消费"
+			}
+		},
+		{
+			"path": "pages/setting/index",
+			"style": {
+				"navigationBarTitleText": "系统设置"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#909399",
+		"selectedColor": "#303133",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/uview/example/component.png",
+				"selectedIconPath": "static/uview/example/component_select.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/user/list",
+				"iconPath": "static/uview/example/js.png",
+				"selectedIconPath": "static/uview/example/js_select.png",
+				"text": "工具"
+			},
+			{
+				"pagePath": "pages/setting/index",
+				"iconPath": "static/uview/example/template.png",
+				"selectedIconPath": "static/uview/example/template_select.png",
+				"text": "设置"
+			}
+		]
+	}
+
+}

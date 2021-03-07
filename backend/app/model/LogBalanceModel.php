@@ -86,4 +86,9 @@ class LogBalanceModel extends Model
             return false;
         }
     }
+
+    public function getTypeAttr($value)
+    {
+        return get_log_balance_type($value);
+    }
 }

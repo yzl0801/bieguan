@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace app;
 
+use app\model\ConfigModel;
 use think\App;
 use think\exception\ValidateException;
 use think\Validate;
@@ -52,7 +53,12 @@ abstract class BaseController
 
     // 初始化
     protected function initialize()
-    {}
+    {
+        $configs = ConfigModel::where(1, 1)->select();
+        foreach($configs as $k =>$v) {
+            config([$v['key'] => $v['value']], 'app');
+        }
+    }
 
     /**
      * 验证数据

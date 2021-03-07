@@ -9,6 +9,7 @@ App.mpType = 'app'
 import uView from 'uview-ui'
 Vue.use(uView);
 
+import "@/env/.env.js";
 
 const app = new Vue({
     ...App

@@ -27,7 +27,7 @@
 						<u-button type="primary" class="u-margin-10" size="mini" plain="" @click="edit(item)">编辑</u-button>
 						<u-button type="error" class="u-margin-10" size="mini"  plain="" @click="ins(item)">充值</u-button>
 						<u-button type="error" class="u-margin-10" size="mini"  plain="" @click="out(item)">消费</u-button>
-						<u-button type="warning" class="u-margin-10" size="mini"  plain="" @click="log(item)">余额记录</u-button>
+						<u-button type="warning" class="u-margin-10" size="mini"  plain="" @click="log(item)">明细</u-button>
 					</view>
 				</view>
 			</view>
@@ -99,7 +99,7 @@
 			},
 			log(item) {
 				uni.navigateTo({
-					url: '/pages/balance/log?id=' + item.id
+					url: '/pages/user/log?id=' + item.id
 				})
 			}
 		},
@@ -134,9 +134,9 @@
 <style lang="scss" scoped>
 	.container {}
 	.user-list {
-		padding: 20rpx 0;
+		padding: 1rpx 0 30rpx;
 		background-color: #f7f7f7;
-		height: 90vh;
+		// height: 90vh;
 		.user-item {
 			background-color: #fff;
 			margin: 20rpx;
@@ -144,6 +144,9 @@
 			border-radius: 20rpx;
 			.red {
 				color: $u-type-error;
+			}
+			&:first-child {
+				
 			}
 		}
 	}

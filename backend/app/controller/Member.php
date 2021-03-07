@@ -58,6 +58,9 @@ class Member extends BaseController
         $m = MemberModel::create($data);
         if($post['balance'] > 0) {
             app('logic.log_balance')->in($m->id, $post['balance'], LogBalanceModel::TYPE_CREATE, "新增用户直接充值");
+            if(config('app.ratio') > 0) {
+                app('logic.log_balance')->in($m->id, round((config('app.ratio') * $post['balance'] /100), 2), LogBalanceModel::TYPE_RECHARGE_PROMOTION, "账户充值赠送");
+            }
         }
         Db::commit();
 
@@ -77,6 +80,7 @@ class Member extends BaseController
                 "msg" => "查无此人"
             ]);
         }
+        $m = MemberModel::where('id', '<>', $id)->where('mobile', $post['mobile'])->find();
         if($m->mobile == $post['mobile']) {
             return json([
                 "code" => 1,
@@ -110,12 +114,6 @@ class Member extends BaseController
             ]);
         }
 
-
-        $configs = ConfigModel::where(1, 1)->select();
-        foreach($configs as $k =>$v) {
-            config([$v['key'] => $v['value']], 'app');
-        }
-
         switch ($request->param('type')) {
             case LogBalanceModel::TYPE_RECHARGE:
                 app('logic.log_balance')->in($post['member_id'], $post['money'], LogBalanceModel::TYPE_RECHARGE, "账户充值");
@@ -132,6 +130,16 @@ class Member extends BaseController
         return json([
             'code' => 0,
             'msg' => 'ok'
+        ]);
+    }
+
+    public function logs(Request $request, $id)
+    {
+        $list = LogBalanceModel::where('member_id', $id)->order('id desc')->select();
+
+        return json([
+            "code" => 0,
+            "data" => $list
         ]);
     }
 }

@@ -18,4 +18,5 @@ Route::get('hello/:name', 'index/hello');
 
 Route::get('member/list', 'member/lists');
 Route::post('member/account-change', 'member/accountChange');
+Route::get('member/balance-log-list', 'member/logs');
 

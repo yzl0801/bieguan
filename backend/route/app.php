@@ -16,7 +16,20 @@ Route::get('think', function () {
 
 Route::get('hello/:name', 'index/hello');
 
-Route::get('member/list', 'member/lists');
-Route::post('member/account-change', 'member/accountChange');
-Route::get('member/balance-log-list', 'member/logs');
+Route::post('login', 'auth/login')->name('login');
+
+Route::group(function() {
+    Route::get('config/get', 'config/get');
+    Route::post('config/save', 'config/save');
+
+    Route::get('member/list', 'member/lists');
+    Route::get('member/profile', 'member/profile');
+    Route::post('member/create', 'member/create');
+    Route::post('member/update', 'member/update');
+    Route::post('member/delete', 'member/delete');
+
+    Route::post('member/account-change', 'member/accountChange');
+    Route::get('member/balance-log-list', 'member/logs');
+})->middleware('jwt-auth');
+
 

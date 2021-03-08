@@ -21,10 +21,12 @@ class Member extends BaseController
 {
     public function lists(Request $request)
     {
-        $list = MemberModel::field("id,username,realname,mobile,sex,balance")->order("update_time desc")->select();
+        $list = MemberModel::field("id,username,realname,mobile,sex,balance")
+//            ->append(['show'])
+            ->order("create_time desc")->select();
         return json([
             'code' => 0,
-            'data' => $list
+            'data' => $list,
         ]);
     }
 
@@ -32,7 +34,7 @@ class Member extends BaseController
     public function profile(Request $request, $id)
     {
         $m = MemberModel::find($id);
-        $m->visible(['id','username','realname','mobile','sex','balance']);
+        $m->visible(['id','username','realname','mobile','sex','balance', 'remark']);
 
         return json([
             "code" => 0,
@@ -73,18 +75,18 @@ class Member extends BaseController
     public function update(Request $request, $id)
     {
         $post = $request->post();
+        $m = MemberModel::where('id', '<>', $id)->where('mobile', $post['mobile'])->find();
+        if($m) {
+            return json([
+                "code" => 1,
+                "msg" => "手机号重复"
+            ]);
+        }
         $m = MemberModel::find($id);
         if(!$m) {
             return json([
                 "code" => 1,
                 "msg" => "查无此人"
-            ]);
-        }
-        $m = MemberModel::where('id', '<>', $id)->where('mobile', $post['mobile'])->find();
-        if($m->mobile == $post['mobile']) {
-            return json([
-                "code" => 1,
-                "msg" => "手机号重复"
             ]);
         }
 
@@ -97,13 +99,30 @@ class Member extends BaseController
     }
 
 
+    /**
+     * 删除会员
+     *
+     * @param Request $request
+     * @param $id
+     * @return \think\response\Json
+     */
+    public function delete(Request $request, $id)
+    {
+        MemberModel::destroy($id);
+
+        return json([
+            'code' => 0,
+            'msg' => 'ok'
+        ]);
+    }
+
     public function accountChange(Request $request)
     {
         $post = $request->post();
         if($post['money'] <= 0) {
             return json([
                 'code' => 1,
-                'msg' => '充值金额为0'
+                'msg' => '充值金额小于0'
             ]);
         }
         $m = MemberModel::find($post['member_id']);

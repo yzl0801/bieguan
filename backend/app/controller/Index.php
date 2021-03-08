@@ -2,6 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
+use Firebase\JWT\JWT;
 
 class Index extends BaseController
 {
@@ -14,4 +15,5 @@ class Index extends BaseController
     {
         return 'hello,' . $name;
     }
+
 }

@@ -3,6 +3,7 @@ declare (strict_types = 1);
 
 namespace app;
 
+use app\logic\AuthLogic;
 use app\model\ConfigModel;
 use app\model\LogBalanceModel;
 use app\model\MemberModel;
@@ -18,6 +19,7 @@ class AppService extends Service
     {
         // 服务注册
         $this->app->bind('logic.log_balance', LogBalanceModel::class);
+        $this->app->bind('logic.auth', AuthLogic::class);
     }
 
     public function boot()

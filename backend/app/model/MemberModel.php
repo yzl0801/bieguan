@@ -21,4 +21,9 @@ class MemberModel extends Model
     protected $table = 'member';
 
     protected $autoWriteTimestamp = 'datetime';
+
+    public function getShowAttr($value)
+    {
+        return false;
+    }
 }

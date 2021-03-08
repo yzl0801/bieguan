@@ -16,6 +16,12 @@
 			}
 		},
 		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
 			"path": "pages/user/list",
 			"style": {
 				"navigationBarTitleText": "会员列表"

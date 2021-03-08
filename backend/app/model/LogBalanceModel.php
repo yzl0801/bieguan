@@ -9,6 +9,7 @@
 namespace app\model;
 
 
+use think\Exception;
 use think\facade\Db;
 use think\Model;
 
@@ -33,7 +34,7 @@ class LogBalanceModel extends Model
     public function in($member_id, $money, $type, $desc = '')
     {
         if($money < 0) {
-            return false;
+            throw new Exception("金额不能小于0", 1);
         }
         $user = MemberModel::lock(true)->find($member_id);
 
@@ -60,13 +61,14 @@ class LogBalanceModel extends Model
     public function out($member_id, $money, $type, $desc = '')
     {
         if($money < 0) {
-            return false;
+            throw new Exception("金额不能小于0", 1);
         }
+
         Db::startTrans();
         $user = MemberModel::lock(true)->find($member_id);
         if(bcsub($user->balance, $money, 2) < 0) {
             Db::rollback();
-            return false;
+            throw new Exception("账户余额不足", 1);
         }
 
         $data = [];

@@ -8,6 +8,8 @@ const install = (Vue, vm) => {
 	// let get_config = (params = {}) => vm.$u.get('/config/get', params);
 	vm.$u.api = {}
 	
+	vm.$u.api.login = (params = {}) => vm.$u.post('/login', params);
+	
 	vm.$u.api.get_config = (params = {}) => vm.$u.get('/config/get', params);
 	// 此处使用了传入的params参数，一切自定义即可
 	vm.$u.api.update_config = (params = {}) => vm.$u.post('/config/save', params);
@@ -17,6 +19,8 @@ const install = (Vue, vm) => {
 	vm.$u.api.create_user = (params = {}) => vm.$u.post('/member/create', params);
 	
 	vm.$u.api.update_user = (params = {}) => vm.$u.post('/member/update', params);
+	
+	vm.$u.api.delete_user = (params = {}) => vm.$u.post('/member/delete', params);
 	
 	vm.$u.api.user_profile = (params = {}) => vm.$u.get('/member/profile', params);
 	
